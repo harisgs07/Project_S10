@@ -238,7 +238,7 @@ $s = $_SESSION['id'];
                with font-awesome or any other icon font library -->
           <li class="nav-item ">
             <a href="group.php" class="nav-link ">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-copy"></i>
               <p>
                 Groups
                 <!--<i class="right fas fa-angle-left"></i>-->
@@ -249,16 +249,18 @@ $s = $_SESSION['id'];
 			 
               <li class="nav-item">
                 <a href="contact.php" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <i class="nav-icon far fa-plus-square"></i>
                   <p>Contact</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="contact-us.php" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Contact  Us</p>
-                </a>
-              </li>
+             <li class="nav-item">
+            <a href="contact-us.php" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Enquiry/complaints
+              </p>
+            </a>
+          </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>

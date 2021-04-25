@@ -37,7 +37,9 @@
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 
 
+<style>
 
+</style>
 
 
  
@@ -108,13 +110,28 @@ include('top_side_navbar.php');
             <div class="card-body">
               <div class="form-group">
                   <label>Username</label>
-                  <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                    <option>A</option>
-                    <option>B</option>
-                    <option>C</option>
-                    <option>D</option>
-                    <option>E</option>
-                   
+                  <select class="form-group select2" id='m' multiple="multiple" data-placeholder="Select a State" style="width:100%;">
+					 <?php
+				
+				include('database.php');
+					//echo "<script>alert('".$prjctid."')</script>";
+					$sql1 ="SELECT * from tbl_account a, tbl_reg_users r where a.regid=r.regid ";
+					$query1=mysqli_query($con,$sql1);
+					$r1=mysqli_num_rows($query1);		
+					if($r1>0)
+					{
+						while($result = mysqli_fetch_array($query1))
+						{			
+							?>
+							
+					<option class="form-control-sm " value="<?php echo $result['regid'];?>"><?php echo $result['username'];?><br>
+					(<span   id="rt" ><?php echo $result['email'];?></span>)
+					</option>
+					
+					<?php
+						}
+					}
+					?>
                   </select>
                 </div>
             </div>
@@ -126,7 +143,7 @@ include('top_side_navbar.php');
       <div class="row">
         <div class="col-12">
           <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Create new Porject" class="btn btn-success float-right">
+          <input type="button" id='b' value="Create new Porject" class="btn btn-success float-right">
         </div>
       </div>
     </section>
@@ -176,7 +193,35 @@ include('top_side_navbar.php');
     //Initialize Select2 Elements
     $('.select2bs4').select2({
       theme: 'bootstrap4'
-    })})
+    })
+	
+  $('#b').click(function(){
+		var name = $('#inputName').val();
+		var description = $('#inputDescription').val();
+		var stastus = $('#inputStatus').val();
+		var members = $('#inputTotalMembers').val();
+		var email = $('#inputClientCompany').val();
+		var leader = $('#inputProjectLeader').val();
+		var a = $('#m').val();
+	  //alert(a);
+	    jQuery.ajax({
+		url: "create_group_ajax.php",
+		data:{name:name,description:description,members:members,email:email,leader:leader,stastus:stastus,a:a},
+		type: "POST",
+		success:function(data){
+			alert(data);
+			toastr.success(data);
+			$('#m').val('');
+		},
+		error:function (){
+			toastr.danger('updation Went Error');
+		}
+		})
+  }
+      
+    )
+	
+	})
 </script>
 </body>
 </html>

@@ -1,4 +1,7 @@
 
+
+
+
 <?php
 
 //........... group Enabling/Disabling .........			
@@ -26,6 +29,57 @@ if(isset($_REQUEST['x']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- BS Stepper -->
+  <link rel="stylesheet" href="plugins/bs-stepper/css/bs-stepper.min.css">
+  <!-- dropzonejs -->
+  <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -84,7 +138,7 @@ include('top_side_navbar.php');
 			</div>
 			<div>
 			<form method='post' action='report-gen-group-master.php?x=<?php echo $prjctid;?>' >
-			&nbsp;&nbsp;&nbsp;<button id="chng" class="btn btn-success float-right"><i class="fas fa-download"></i>Report gen</button>
+			&nbsp;&nbsp;&nbsp;<button id="chng1" class="btn btn-success float-right"><i class="fas fa-download"></i>Report gen</button>
 			</form>
 			</div>
 			</div>
@@ -100,6 +154,9 @@ include('top_side_navbar.php');
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+
+
+
 
     <!-- Main content -->
     <section class="content">
@@ -186,38 +243,39 @@ include('top_side_navbar.php');
             <!-- MAP & BOX PANE -->
            
 		   <!-- TABLE: LATEST ORDERS -->
-            <div class="card">
-              <div class="card-header border-transparent">
-                <h3 class="card-title">Files Added</h3>
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
+             <div class="card" style='overflow:auto;'>  
+            <!-- /.card -->
+              <div class="card-header">
+                <h3 class="card-title">Files</h3>
+				 
+                <!--<a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>-->
+                <a href='group_master.php?x=<?php echo $prjctid;?>' class="btn btn-sm btn-secondary float-right">Refresh Table</a>
+              
               </div>
+			 
               <!-- /.card-header -->
-              <div class="card-body p-0">
-                <div class="table-responsive">
-                  <table class="table m-0 table-hover">
-                    <thead>
-                    <tr>
-                      <th>File ID</th>
-                      <th>File</th>
-                      <th>About</th>
-                      <th>Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-					<?php
-					include('database.php');
+              <div class="card-body">
+                <table id="example1" class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>File_Name</th>
+                    <th>About</th>
+                    <th>Date</th>
+					<th>By_Whom</th>   
+                  </tr>
+                  </thead>
+                  <tbody>
+                 
+                 <?php	
+				include('database.php');
 					//echo "<script>alert('".$prjctid."')</script>";
-					$sql1 ="SELECT * from tbl_prjct_file where prjctid=$prjctid LIMIT 9";
+					$sql1 ="SELECT *,f.about from tbl_prjct_file f, tbl_account a where f.prjctid=$prjctid and f.regid=a.regid ";
 					$query1=mysqli_query($con,$sql1);
 					$r1=mysqli_num_rows($query1);
+				
+					
 					if($r1>0)
 					{
 						while($result = mysqli_fetch_array($query1))
@@ -230,22 +288,33 @@ include('top_side_navbar.php');
 						 <td><?php echo $result['file'];?></td>
 						 <td><?php echo $result['about'];?></td>
 						 <td><?php echo $result['date'];?></td>
+						 <td><a href='profile.php?x="<?php echo $result['regid'];?>"'><?php echo $result['username'];?></td>
 						</tr>
 						<?php
 						}	
-					}?>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.table-responsive -->
+					}?>  
+				  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Id</th>
+                    <th>File_Name</th>
+                    <th>About</th>
+                    <th>Date</th>
+					<th>By_Whom</th>           
+                  </tr>
+                  </tfoot>				  
+                </table>
               </div>
+			  </div>
               <!-- /.card-body -->
-              <div class="card-footer clearfix">
-                <!--<a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>-->
-                <a href='group_master.php?x=<?php echo $prjctid;?>' class="btn btn-sm btn-secondary float-right">Refresh Table</a>
-              </div>
-              <!-- /.card-footer -->
-            </div>
+            <!-- /.card -->  
+          <!-- /.col -->
+        <!-- /.row -->
+      
+	  
+      <!-- /.container-fluid -->
+    
+			
 		   
             <!-- /.card -->
             <div class="row">
@@ -415,9 +484,7 @@ include('top_side_navbar.php');
                 </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0">
-                <ul class="products-list product-list-in-card pl-2 pr-2">
-                  <li class="item">
+              
                    
 				   <?php
 					include('database.php');
@@ -427,6 +494,11 @@ include('top_side_navbar.php');
 					$r1=mysqli_num_rows($query1);
 					if($r1>0)
 					{
+						?>
+						<div class="card-body p-0" style="overflow-y:auto; height:400px;">
+						<ul class="products-list product-list-in-card pl-2 pr-2">
+						  <li class="item">
+						<?php
 						while($result = mysqli_fetch_array($query1))
 						{
 							//$_SESSION['d']= $result['acid'];
@@ -445,14 +517,25 @@ include('top_side_navbar.php');
 						
 						<?php
 						}	
-					}?>
-				
-				   
-				   
-				   
-                  <!-- /.item -->
+					?>
+					<!-- /.item -->
                 </ul>
               </div>
+			  <?php
+			  }
+			  else
+			  {
+			  ?>
+			  <div class="card-body p-0">
+                <ul class="products-list product-list-in-card pl-2 pr-2">
+                  <li class="item">
+				  <span style='color:red;'> <center>No Files Added By you</center><span>
+				   </li>
+				   </ul>
+              </div>
+			  <?php
+			  }
+			  ?>
               <!-- /.card-body -->
               <div class="card-footer text-center">
                 <a href="javascript:void(0)" class="uppercase">View All Products</a>
@@ -468,17 +551,31 @@ include('top_side_navbar.php');
                   To Do List
                 </h3>            
               </div>
+			  <form method='post'>
               <!-- /.card-header -->
-              <div class="card-body" style="font-size:15px;overflow-y:scroll; height:374px;">
-                <ul class="todo-list" data-widget="todo-list">
-                  <li>                    
+  
+				  <?php  
+				$sqlp ="SELECT * from todolist where prjctid=$prjctid";
+				$querysql=mysqli_query($con,$sqlp);
+				if(mysqli_num_rows($querysql)>0)
+				{
+					?>
+					<div class="card-body" style="font-size:15px;overflow:auto; max-height:374px;">
+					<ul class="todo-list" data-widget="todo-list">
+				<?php
+					while($qres=mysqli_fetch_array($querysql))
+					{
+						if($qres['check_check'] == 1)
+						{							
+				  ?>  
+				  <li>                  
                     <!-- checkbox -->
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo1" id="todoCheck1">
-                      <label for="todoCheck1"></label>
+                    <div  class="d-inline ml-2">
+                      <input type="checkbox" value="" onclick='check_todolistq(<?php echo $qres['id'];?>)' checked></input>
+                     
                     </div>
                     <!-- todo text -->
-                    <span class="text">Design a nice theme</span>
+                    <span class="text" style="text-decoration:line-through;" id="<?php echo $qres['id'];?>" ><?php echo $qres['about']; ?></span>
                     <!-- Emphasis label -->
                     <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
                     <!-- General tools such as edit or delete-->
@@ -487,72 +584,67 @@ include('top_side_navbar.php');
                       <i class="fas fa-trash-o"></i>
                     </div>
                   </li>
-                  <li>     
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
-                      <label for="todoCheck2"></label>
+				  <?php
+						}
+						else
+						{ 
+				  ?>
+				  <li>                  
+                    <!-- checkbox -->
+                    <div  class=" d-inline ml-2">
+                     <input type="checkbox" value="" onclick='check_todolistq(<?php echo $qres['id'];?>)'></input>
                     </div>
-                    <span class="text">Make the theme responsive</span>
-                    <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
+                    <!-- todo text -->
+                    <span class="text" id="<?php echo $qres['id'];?>" ><?php echo $qres['about']; ?></span>
+                    <!-- Emphasis label -->
+                    <small class="badge badge-danger"><i class="far fa-clock"></i> <?php echo ceil((strtotime(date("Y-m-d")) - strtotime($qres['last_date']))/86400);?> days</small>
+                    <!-- General tools such as edit or delete-->
                     <div class="tools">
                       <i class="fas fa-edit"></i>
                       <i class="fas fa-trash-o"></i>
                     </div>
                   </li>
-                  <li>    
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo3" id="todoCheck3">
-                      <label for="todoCheck3"></label>
-                    </div>
-                    <span class="text">Let theme shine like a star</span>
-                    <small class="badge badge-warning"><i class="far fa-clock"></i> 1 day</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                  <li>     
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo4" id="todoCheck4">
-                      <label for="todoCheck4"></label>
-                    </div>
-                    <span class="text">Let theme shine like a star</span>
-                    <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                  <li> 
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo5" id="todoCheck5">
-                      <label for="todoCheck5"></label>
-                    </div>
-                    <span class="text">Check your messages and notifications</span>
-                    <small class="badge badge-primary"><i class="far fa-clock"></i> 1 week</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                  <li>
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo6" id="todoCheck6">
-                      <label for="todoCheck6"></label>
-                    </div>
-                    <span class="text">Let theme shine like a star</span>
-                    <small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                </ul>
+				  <?php
+						}
+					}
+					?>
+					</ul>
               </div>
+				<?php
+				}
+				else
+				{
+				  ?>
+				  <div class="card-body" style="font-size:15px;overflow:auto;">
+					<ul class="todo-list" data-widget="todo-list">
+					<li>                  
+                    <!-- checkbox -->
+                    <div  class="icheck-primary d-inline ml-2">
+                      <input type="checkbox" value="">
+                      <label for="todoCheck1"></label>
+                    </div>
+                    <!-- todo text -->
+                    <span class="text">No To Do List have Been Added</span>
+                    <!-- Emphasis label -->
+                    <small class="badge badge-danger"><i class="far fa-clock"></i> Refresh</small>
+                    <!-- General tools such as edit or delete-->
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-o"></i>
+                    </div>
+                  </li>
+					</ul>
+				</div>
+				  
+                <?php
+				}
+				?>
+				
               <!-- /.card-body -->
               <div class="card-footer clearfix" >
                 <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modal-default1"><i class="fas fa-plus" ></i> Add item</button>
               </div>
+			  </form>
             </div>
           </div>
           <!-- /.col -->
@@ -562,6 +654,25 @@ include('top_side_navbar.php');
     </section>
     <!-- /.content -->
   </div>
+  
+  
+  <script>
+function check_todolistq(vals)
+{
+	alert(vals);
+	$.ajax({
+		url: "check_todolist.php",
+		data:{vals:vals},
+		type: "POST",
+		success:function(data){
+			alert(data);
+			$('#'+vals).css({'text-decoration':data});
+		},
+		error:function (){}
+		})
+}
+</script>
+  
   <!-- /.content-wrapper -->
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -604,9 +715,10 @@ include('top_side_navbar.php');
 
    <!-- modal for todolist -->
  <div class="modal fade" id="modal-default1">
+ <form method='post'>
         <div class="modal-dialog" Style="margin-right:560px;">
           <div class="modal-content" Style="width:800px;">
-		  <form method='post'>
+		  
             <div class="modal-header">
               <h4 class="modal-title">To Do Programs</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -616,41 +728,47 @@ include('top_side_navbar.php');
             <div class="modal-body">
              <div class="card card-primary">
             <!-- Project-add -->
+			
             <div class="card-body">
 			
 			<div class="form-group">
                 <label for="inputName">Titles/Topic</label>
-                <input type="text" id="inputName" class="form-control">
+                <input type="text" id="inputName" name='about' class="form-control">
               </div>
               <div class="form-group">
-                <label for="inputDescription">Gap</label>
-                <input type="number" id="inputDescription" class="form-control" placeholder='Number of dates' ></textarea>
-              </div> 
-			</form>
+				  <div class='row mb-2'>
+					  <div class='col mb-6'>
+						  <label>start Date:</label>
+							<div>
+							<input type='text' value='From Today Own-wards' disabled> </input>
+							</div>
+						</div>
+						<div class='col mb-6' >
+							<label>Last Date:</label>
+							<div>
+							<input id='ldate' name='gap' type='date'></input>
+							</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			
             </div>
+			
             <!-- /.card-body -->
           </div>
-            </div>
+           
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
-              <button type="button" id='savechanges' data-dismiss="modal" class="btn btn-primary">Save changes</button>
+              <button type="button" onclick='savechangestodo(<?php echo $prjctid; ?>)' id='savechanges' data-dismiss="modal" class="btn btn-primary">Save changes</button>
             </div>
-			</form>
-          </div>
+			</div>
+		   </div>
+		   </form>
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-      </div>
-
-
-
-
-
-
-
-
-
-
 
 
   <!-- Main Footer -->
@@ -691,29 +809,60 @@ include('top_side_navbar.php');
 <script src="dist/js/pages/dashboard2.js"></script>
 
 <script>
-$('document').ready(function()
+function savechangestodo(vale)
 {
-	
-	$('#savechanges').click(function()
-	{
-		
-		var about = $('#inputName').val();
-		var gap = $('#inputDescription').val();
-		jQuery.ajax({
+	var about = $('#inputName').val();
+		var gap = $('#ldate').val();	
+		$.ajax({
 		url: "todolist_add.php",
-		data:{about:about,gap:gap},
+		data:{about:about,gap:gap,vale:vale},
 		type: "POST",
 		success:function(data){
-			$('.form-control').val('');
-			alert('hi');
+			location.reload();
 		},
 		error:function (){}
 		})
-	});
-	
-});
+}
+
+
 
 </script>
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": true, "autoWidth": true,    
+    }).buttons().container().appendTo('#example1_wrapper .col-md-3:eq(0)');
+   
+    
+   
+  });
+</script>
+
+
+
 
 </body>
 </html>

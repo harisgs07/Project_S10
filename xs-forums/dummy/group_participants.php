@@ -28,6 +28,23 @@ if(isset($_REQUEST['x']))
 <html lang="en">
 <head>
 
+
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+
+
+
+
+
+
  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -173,38 +190,38 @@ include('top_side_navbar.php');
             <!-- MAP & BOX PANE -->
            
 		   <!-- TABLE: LATEST ORDERS -->
-            <div class="card">
-              <div class="card-header border-transparent">
-                <h3 class="card-title">Files Added</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
+            <div class="card" style='overflow:auto;'>  
+            <!-- /.card -->
+              <div class="card-header">
+                <h3 class="card-title">DataTable with default features</h3>
+				 
+                <!--<a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>-->
+                <a href='group_master.php?x=<?php echo $prjctid;?>' class="btn btn-sm btn-secondary float-right">Refresh Table</a>
+              
               </div>
+			 
               <!-- /.card-header -->
-              <div class="card-body p-0">
-                <div class="table-responsive">
-                  <table class="table m-0 table-hover">
-                    <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>File</th>
-                      <th>About</th>
-                      <th>Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-					<?php
-					include('database.php');
+              <div class="card-body">
+                <table id="example1" class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>File_Name</th>
+                    <th>About</th>
+                    <th>Date</th>
+					<th>By_Whom</th>   
+                  </tr>
+                  </thead>
+                  <tbody>
+                 
+                 <?php	
+				include('database.php');
 					//echo "<script>alert('".$prjctid."')</script>";
-					$sql1 ="SELECT * from tbl_prjct_file where prjctid=$prjctid LIMIT 9";
+					$sql1 ="SELECT *,f.about from tbl_prjct_file f, tbl_account a where f.prjctid=$prjctid and f.regid=a.regid ";
 					$query1=mysqli_query($con,$sql1);
 					$r1=mysqli_num_rows($query1);
+				
+					
 					if($r1>0)
 					{
 						while($result = mysqli_fetch_array($query1))
@@ -217,22 +234,40 @@ include('top_side_navbar.php');
 						 <td><?php echo $result['file'];?></td>
 						 <td><?php echo $result['about'];?></td>
 						 <td><?php echo $result['date'];?></td>
+						 <td><a href='profile.php?x="<?php echo $result['regid'];?>"'><?php echo $result['username'];?></td>
 						</tr>
 						<?php
 						}	
-					}?>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.table-responsive -->
+					}?>  
+				  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Id</th>
+                    <th>File_Name</th>
+                    <th>About</th>
+                    <th>Date</th>
+					<th>By_Whom</th>           
+                  </tr>
+                  </tfoot>				  
+                </table>
               </div>
-              <!-- /.card-body -->
-              <div class="card-footer clearfix">
-                <!--<a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>-->
-                <a href='group_participants.php?x=<?php echo $prjctid;?>' class="btn btn-sm btn-secondary float-right">Refresh Table</a>
-              </div>
-              <!-- /.card-footer -->
-            </div>
+			  </div>
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
 		   
             <!-- /.card -->
             <div class="row">
@@ -621,5 +656,40 @@ include('top_side_navbar.php');
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard2.js"></script>
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": true, "autoWidth": true,    
+    }).buttons().container().appendTo('#example1_wrapper .col-md-3:eq(0)');
+   
+  });
+</script>
+
+
+
+
 </body>
 </html>

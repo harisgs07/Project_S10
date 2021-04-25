@@ -19,10 +19,11 @@ $r=mysqli_num_rows($query);
 				$id = $results['regid'];
 				$_SESSION['id'] = $results['regid'];
 				echo"<script>alert('".$_SESSION['id']."');</script>";
+				
+				$sql1 = "SELECT username FROM tbl_account WHERE regid=$id and valid='1'";
+				$query1=mysqli_query($con,$sql1);
 				$s = "update tbl_account set stastus='online' where regid='$id'";
 				$q=mysqli_query($con,$s);
-				$sql1 = "SELECT username FROM tbl_account WHERE regid=$id";
-				$query1=mysqli_query($con,$sql1);
 				$r1=mysqli_num_rows($query1);
 				if($r1 > 0)
 				{
@@ -30,7 +31,11 @@ $r=mysqli_num_rows($query);
 					{
 						$_SESSION['uname']=$results1['username'];
 					}
-				}		
+				}
+				else				
+				{
+					echo "<script>alert('Your Account Is Temporarly Unavailable or Blocked because of malicious act');</script>";
+				}
 			$_SESSION['login']=$results['regid'];
 			$_SESSION['email']=$results['email'];
 			$_SESSION['type'] = $results['type'];
@@ -43,10 +48,11 @@ $r=mysqli_num_rows($query);
 			{
 				$id = $results['regid'];
 				$_SESSION['id'] = $results['regid'];
+				
+				$sql1 = "SELECT username FROM tbl_cmpny_account WHERE regid=$id and valid='1'";
+				$query1=mysqli_query($con,$sql1);
 				$s = "update tbl_cmpny_account set stastus='online' where regid='$id'";
 				$q=mysqli_query($con,$s);
-				$sql1 = "SELECT username FROM tbl_cmpny_account WHERE regid=$id";
-				$query1=mysqli_query($con,$sql1);
 				$r1=mysqli_num_rows($query1);
 				if($r1 > 0)
 				{
@@ -54,12 +60,16 @@ $r=mysqli_num_rows($query);
 					{
 						$_SESSION['uname']=$results1['username'];
 					}
-				}		
+				}
+				else
+				{
+					echo "<script>alert('Your Account Is Temporarly Unavailable or Blocked because of malicious act');</script>";
+				}				
 			$_SESSION['login']=$results['regid'];
 			$_SESSION['email']=$results['email'];
 				if ($results['type'] == 'company')
 				{
-				echo "<script type='text/javascript'> document.location = 'main.php'; </script>";
+				echo "<script type='text/javascript'> document.location = 'recruiter/recruiter_main.php'; </script>";
 				}
 			}
 		} 
@@ -143,7 +153,7 @@ $r=mysqli_num_rows($query);
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="#">I forgot my password</a>
+        <a href="forgot_password.php">I forgot my password</a>
       </p>
       <p class="mb-0">
         <a href="register.php" class="text-center">Register a new membership</a>

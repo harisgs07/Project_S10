@@ -14,7 +14,8 @@ $id = mysqli_insert_id($con);
 $sql1="INSERT INTO  tbl_account (username, regid) VALUES('$username',$id)";
 $query1 = mysqli_query($con,$sql1);
 if ($query1)
-{		
+{	
+echo "<script>alert('Successfully Registered');</script>";	
 header('location:login.php');
 }
 else
@@ -38,7 +39,8 @@ $sql1="INSERT INTO  tbl_cmpny_account (username, email, regid) VALUES('$username
 $query1 = mysqli_query($con,$sql1);
 if ($query1)
 {	
-//header('location:login.php');	
+echo "<script>alert('Successfully Registered');</script>";
+header('location:login.php');	
 }
 else
 {

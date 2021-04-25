@@ -21,11 +21,11 @@
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   
     <!-- Font Awesome -->
-  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 </head>
-<bod	y class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 <?php
 include('top_side_navbar.php');
@@ -380,6 +380,8 @@ alert(title);
     });
   });*/
 </script>
-
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
 </body>
 </html>

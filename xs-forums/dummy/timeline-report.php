@@ -64,6 +64,8 @@ if(isset($_REQUEST['x']))
               <div class="card-header">
                 <h3 class="card-title">DataTable with default features</h3>
               </div>
+			  </div>
+			  <div class="row">
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-hover">
