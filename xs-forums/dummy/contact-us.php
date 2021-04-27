@@ -140,7 +140,7 @@ if(isset($_POST['send']))
 
 function send(vid) {
 	var msg = $('#im').val();
-	alert(msg);
+	//alert(msg);
 	$.ajax({
 		type: "POST",
 		url: "contact-us-update-ajax.php",

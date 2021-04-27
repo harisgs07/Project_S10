@@ -306,7 +306,7 @@ $('document').ready(function()
 function post_answer(v)
 {
 var title = $('#' + v).val();
-alert(v);
+//alert(v);
 		jQuery.ajax({
 		url: "add_post_ans.php",
 		data:{title:title,v:v},

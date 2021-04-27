@@ -140,7 +140,7 @@ include('top_side_navbar.php');
 
 function send(vid) {
 	var msg = $('#im').val();
-	alert(msg);
+	//alert(msg);
 	$.ajax({
 		type: "POST",
 		url: "contact-us-update-ajax.php",

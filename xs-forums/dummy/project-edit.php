@@ -263,7 +263,7 @@ include('database.php');
 <script>
 function del(vid)
 	{
-		alert(vid);
+		//alert(vid);
 		jQuery.ajax({
 		url: "file-dlt.php",
 		data:{vid:vid},

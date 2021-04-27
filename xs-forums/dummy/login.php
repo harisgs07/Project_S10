@@ -18,7 +18,7 @@ $r=mysqli_num_rows($query);
 			{
 				$id = $results['regid'];
 				$_SESSION['id'] = $results['regid'];
-				echo"<script>alert('".$_SESSION['id']."');</script>";
+				//echo"<script>alert('".$_SESSION['id']."');</script>";
 				
 				$sql1 = "SELECT username FROM tbl_account WHERE regid=$id and valid='1'";
 				$query1=mysqli_query($con,$sql1);

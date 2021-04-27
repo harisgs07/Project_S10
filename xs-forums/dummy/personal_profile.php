@@ -416,7 +416,7 @@ if(isset($_REQUEST['x']))
 			
 		function update_profile(uid)
 		{
-			alert(uid);
+			//alert(uid);
 			/*var prid = id;
 			var dev ='developer';
 			var val1 = val;*/

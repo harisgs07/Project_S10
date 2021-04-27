@@ -659,13 +659,13 @@ include('top_side_navbar.php');
   <script>
 function check_todolistq(vals)
 {
-	alert(vals);
+	//alert(vals);
 	$.ajax({
 		url: "check_todolist.php",
 		data:{vals:vals},
 		type: "POST",
 		success:function(data){
-			alert(data);
+			//alert(data);
 			$('#'+vals).css({'text-decoration':data});
 		},
 		error:function (){}

@@ -14,7 +14,7 @@ if(isset($_REQUEST['x']))
 				 $sql1 ="SELECT * from tbl_reg_users where regid=$uid";
 				$query1=mysqli_query($con,$sql1);
 				$r1=mysqli_fetch_array($query1);
-				echo "<script>alert('".$r['username']."')</script>";
+				//echo "<script>alert('".$r['username']."')</script>";
 
 }
 ?>
@@ -332,7 +332,7 @@ if(isset($_REQUEST['x']))
 			
 		function update_profile(uid)
 		{
-			alert(uid);
+			//alert(uid);
 			/*var prid = id;
 			var dev ='developer';
 			var val1 = val;*/

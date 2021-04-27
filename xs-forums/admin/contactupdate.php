@@ -65,7 +65,7 @@
 <script>
 function update_stastus(id,val)
 	{
-		alert(id);
+		//alert(id);
 		var id = id;
 		var dev ='contact';
 		var val1 = val;

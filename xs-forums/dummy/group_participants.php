@@ -488,17 +488,31 @@ include('top_side_navbar.php');
                   To Do List
                 </h3>            
               </div>
+			  <form method='post'>
               <!-- /.card-header -->
-              <div class="card-body" style="font-size:15px;overflow-y:scroll; height:374px;">
-                <ul class="todo-list" data-widget="todo-list">
-                  <li>                    
+  
+				  <?php  
+				$sqlp ="SELECT * from todolist where prjctid=$prjctid";
+				$querysql=mysqli_query($con,$sqlp);
+				if(mysqli_num_rows($querysql)>0)
+				{
+					?>
+					<div class="card-body" style="font-size:15px;overflow:auto; max-height:374px;">
+					<ul class="todo-list" data-widget="todo-list">
+				<?php
+					while($qres=mysqli_fetch_array($querysql))
+					{
+						if($qres['check_check'] == 1)
+						{							
+				  ?>  
+				  <li>                  
                     <!-- checkbox -->
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo1" id="todoCheck1">
-                      <label for="todoCheck1"></label>
+                    <div  class="d-inline ml-2">
+                      <input type="checkbox" value="" onclick='check_todolistq(<?php echo $qres['id'];?>)' checked></input>
+                     
                     </div>
                     <!-- todo text -->
-                    <span class="text">Design a nice theme</span>
+                    <span class="text" style="text-decoration:line-through;" id="<?php echo $qres['id'];?>" ><?php echo $qres['about']; ?></span>
                     <!-- Emphasis label -->
                     <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
                     <!-- General tools such as edit or delete-->
@@ -507,72 +521,67 @@ include('top_side_navbar.php');
                       <i class="fas fa-trash-o"></i>
                     </div>
                   </li>
-                  <li>     
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
-                      <label for="todoCheck2"></label>
+				  <?php
+						}
+						else
+						{ 
+				  ?>
+				  <li>                  
+                    <!-- checkbox -->
+                    <div  class=" d-inline ml-2">
+                     <input type="checkbox" value="" onclick='check_todolistq(<?php echo $qres['id'];?>)'></input>
                     </div>
-                    <span class="text">Make the theme responsive</span>
-                    <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
+                    <!-- todo text -->
+                    <span class="text" id="<?php echo $qres['id'];?>" ><?php echo $qres['about']; ?></span>
+                    <!-- Emphasis label -->
+                    <small class="badge badge-danger"><i class="far fa-clock"></i> <?php echo ceil((strtotime(date("Y-m-d")) - strtotime($qres['last_date']))/86400);?> days</small>
+                    <!-- General tools such as edit or delete-->
                     <div class="tools">
                       <i class="fas fa-edit"></i>
                       <i class="fas fa-trash-o"></i>
                     </div>
                   </li>
-                  <li>    
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo3" id="todoCheck3">
-                      <label for="todoCheck3"></label>
-                    </div>
-                    <span class="text">Let theme shine like a star</span>
-                    <small class="badge badge-warning"><i class="far fa-clock"></i> 1 day</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                  <li>     
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo4" id="todoCheck4">
-                      <label for="todoCheck4"></label>
-                    </div>
-                    <span class="text">Let theme shine like a star</span>
-                    <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                  <li> 
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo5" id="todoCheck5">
-                      <label for="todoCheck5"></label>
-                    </div>
-                    <span class="text">Check your messages and notifications</span>
-                    <small class="badge badge-primary"><i class="far fa-clock"></i> 1 week</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                  <li>
-                    <div  class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo6" id="todoCheck6">
-                      <label for="todoCheck6"></label>
-                    </div>
-                    <span class="text">Let theme shine like a star</span>
-                    <small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                </ul>
+				  <?php
+						}
+					}
+					?>
+					</ul>
               </div>
+				<?php
+				}
+				else
+				{
+				  ?>
+				  <div class="card-body" style="font-size:15px;overflow:auto;">
+					<ul class="todo-list" data-widget="todo-list">
+					<li>                  
+                    <!-- checkbox -->
+                    <div  class="icheck-primary d-inline ml-2">
+                      <input type="checkbox" value="">
+                      <label for="todoCheck1"></label>
+                    </div>
+                    <!-- todo text -->
+                    <span class="text">No To Do List have Been Added</span>
+                    <!-- Emphasis label -->
+                    <small class="badge badge-danger"><i class="far fa-clock"></i> Refresh</small>
+                    <!-- General tools such as edit or delete-->
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-o"></i>
+                    </div>
+                  </li>
+					</ul>
+				</div>
+				  
+                <?php
+				}
+				?>
+				
               <!-- /.card-body -->
               <div class="card-footer clearfix" >
-                <button type="button" class="btn btn-success float-right"><i class="fas fa-plus" ></i> Add item</button>
+                <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modal-default1"><i class="fas fa-plus" ></i> Add item</button>
               </div>
+			  </form>
             </div>
           </div>
           <!-- /.col -->
@@ -688,7 +697,22 @@ include('top_side_navbar.php');
   });
 </script>
 
-
+  <script>
+function check_todolistq(vals)
+{
+	//alert(vals);
+	$.ajax({
+		url: "check_todolist.php",
+		data:{vals:vals},
+		type: "POST",
+		success:function(data){
+			//alert(data);
+			$('#'+vals).css({'text-decoration':data});
+		},
+		error:function (){}
+		})
+}
+</script>
 
 
 </body>

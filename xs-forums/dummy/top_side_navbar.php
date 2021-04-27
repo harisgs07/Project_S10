@@ -262,9 +262,9 @@ $s = $_SESSION['id'];
             </a>
           </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="job-event.php" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Code Editor</p>
+                  <p>Job and Event Updates</p>
                 </a>
               </li>
 

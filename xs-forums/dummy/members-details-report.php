@@ -6,7 +6,7 @@ if(isset($_REQUEST['x']))
 {
 	
 	$prjctid=$_GET['x'];
-	echo "<script>alert('$prjctid');</script>";
+	//echo "<script>alert('$prjctid');</script>";
 	
 }?>
  

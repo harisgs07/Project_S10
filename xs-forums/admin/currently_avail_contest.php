@@ -3,7 +3,7 @@
 <script>
 function update_stastus(id,val)
 	{
-		alert(val);
+		//alert(val);
 		var id = id;
 		var dev ='developer';
 		var val1 = val;

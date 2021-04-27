@@ -209,7 +209,7 @@ include('top_side_navbar.php');
 		data:{name:name,description:description,members:members,email:email,leader:leader,stastus:stastus,a:a},
 		type: "POST",
 		success:function(data){
-			alert(data);
+			//alert(data);
 			toastr.success(data);
 			$('#m').val('');
 		},

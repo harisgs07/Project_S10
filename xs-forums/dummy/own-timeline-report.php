@@ -5,9 +5,9 @@ session_start();
 if(isset($_REQUEST['x']))
 {
 	$s=$_SESSION['id'];
-	echo "<script>alert('$s');</script>";
+	//echo "<script>alert('$s');</script>";
 	$prjctid=$_GET['x'];
-	echo "<script>alert('$prjctid');</script>";
+	//echo "<script>alert('$prjctid');</script>";
 	$sql ="SELECT * from tbl_projects where prjctid=$prjctid";
 				$query=mysqli_query($con,$sql);
 				$r=mysqli_fetch_array($query);

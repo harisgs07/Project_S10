@@ -1,7 +1,7 @@
 <?php
 
 $s = $_SESSION['id'];
-echo "<script>alert('".$prjctid."')</script>";
+//echo "<script>alert('".$prjctid."')</script>";
 include('database.php');
 if(isset($_POST['sb']))
 {

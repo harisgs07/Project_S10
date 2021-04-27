@@ -7,7 +7,7 @@ if(isset($_REQUEST['x']))
 {
 	
 	$prjctid=$_GET['x'];
-	echo "<script>alert('".$prjctid."')</script>";
+	//echo "<script>alert('".$prjctid."')</script>";
 	$sql ="SELECT * from tbl_projects where prjctid=$prjctid";
 	$query=mysqli_query($con,$sql);
 	$r=mysqli_fetch_array($query);
@@ -264,7 +264,7 @@ function join_team(id)
 {
 	$('#join').attr('disabled',true);
 	var pid = id;
-	alert(id);
+	//alert(id);
 	$.ajax({
 		type: "POST",
 		url: "join_team.php",
