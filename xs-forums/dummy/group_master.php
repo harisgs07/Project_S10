@@ -1,9 +1,4 @@
-
-
-
-
 <?php
-
 //........... group Enabling/Disabling .........			
 if(isset($_REQUEST['x']))
 {
@@ -29,6 +24,11 @@ if(isset($_REQUEST['x']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -67,16 +67,6 @@ if(isset($_REQUEST['x']))
   <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -126,27 +116,30 @@ include('top_side_navbar.php');
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-		  <div class="row mb-2">
-		  <div >
-            <h1 class="m-0 "><?php echo $r['name'];?>&nbsp;&nbsp;&nbsp;</h1>
-			</div>
-			<div >
-			<form method='post' action='project-edit.php?e=<?php echo $prjctid;?>' >
-			<button id="chng" class="btn btn-primary float-right">Edit Details</button>
-			</form>
-			</div>
-			<div>
-			<form method='post' action='report-gen-group-master.php?x=<?php echo $prjctid;?>' >
-			&nbsp;&nbsp;&nbsp;<button id="chng1" class="btn btn-success float-right"><i class="fas fa-download"></i>Report gen</button>
-			</form>
-			</div>
-			</div>
+          <div class="col-sm-7">
+            <div class="row mb-2">
+              <div >
+                    <h1 class="m-0 "><?php echo $r['name'];?>&nbsp;&nbsp;&nbsp;</h1>
+              </div>
+              <div >
+                <form method='post' action='project-edit.php?e=<?php echo $prjctid;?>' >
+                <button id="chng" class="btn btn-primary float-right">Edit Details</button>
+                </form>
+              </div>
+              <div>
+                <form method='post' action='report-gen-group-master.php?x=<?php echo $prjctid;?>' >
+                &nbsp;&nbsp;&nbsp;<button id="chng1" class="btn btn-success"><i class="fas fa-download"></i> Report gen</button>
+                </form>
+              </div>
+              <div>
+                &nbsp;&nbsp;&nbsp;<button id="revs" class="btn btn-warning " data-toggle="modal" data-target="#modal-default2"><i class="fas fa-book"></i> Reviews</button>
+              </div>
+            </div>
           </div><!-- /.col -->
-          <div class="col-sm-6">
+          <div class="col-sm-5">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-			  <li class="breadcrumb-item active"><a href="group.php">Group</a></li>
+			        <li class="breadcrumb-item active"><a href="group.php">Group</a></li>
               <li class="breadcrumb-item active"><?php echo $r['name'];?></li>
             </ol>
           </div><!-- /.col -->
@@ -195,7 +188,12 @@ include('top_side_navbar.php');
 
               <div class="info-box-content">
                 <span class="info-box-text">Online</span>
-                <span class="info-box-number">41,410</span>
+                <?php
+                  $sqlonline ="SELECT * from tbl_group g, tbl_account a where prjctid=$prjctid and g.regid = a.regid and a.stastus='online' and valid='1' and regid_stastus='valid'";
+                  $queryonline=mysqli_query($con,$sqlonline);
+                  $online=mysqli_num_rows($queryonline);
+                ?>
+                <span class="info-box-number"><?php echo $online;?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -225,7 +223,12 @@ include('top_side_navbar.php');
 
               <div class="info-box-content">
                 <span class="info-box-text">Total Members</span>
-                <span class="info-box-number">2,000</span>
+                <?php
+                  $sqlonline ="SELECT * from tbl_group g, tbl_account a where prjctid=$prjctid and a.regid=g.regid";
+                  $queryonline=mysqli_query($con,$sqlonline);
+                  $online=mysqli_num_rows($queryonline);
+                ?>
+                <span class="info-box-number"><?php echo $online;?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -571,7 +574,7 @@ include('top_side_navbar.php');
 				  <li>                  
                     <!-- checkbox -->
                     <div  class="d-inline ml-2">
-                      <input type="checkbox" value="" onclick='check_todolistq(<?php echo $qres['id'];?>)' checked></input>
+                      <input type="checkbox" value="" onclick="check_todolistq(<?php echo $qres['id'];?>)" checked></input>
                      
                     </div>
                     <!-- todo text -->
@@ -592,18 +595,18 @@ include('top_side_navbar.php');
 				  <li>                  
                     <!-- checkbox -->
                     <div  class=" d-inline ml-2">
-                     <input type="checkbox" value="" onclick='check_todolistq(<?php echo $qres['id'];?>)'></input>
+                     <input type="checkbox" value="" onclick="check_todolistq(<?php echo $qres['id'];?>)"></input>
                     </div>
                     <!-- todo text -->
                     <span class="text" id="<?php echo $qres['id'];?>" ><?php echo $qres['about']; ?></span>
                     <!-- Emphasis label -->
-                    <small class="badge badge-danger"><i class="far fa-clock"></i> <?php echo ceil((strtotime(date("Y-m-d")) - strtotime($qres['last_date']))/86400);?> days</small>
+                    <small class="badge badge-danger"><i class="far fa-clock"></i> <?php echo ceil((strtotime($qres['last_date'])- strtotime(date("Y-m-d")))/86400);?> days</small>
                     <!-- General tools such as edit or delete-->
                     <div class="tools">
                       <i class="fas fa-edit"></i>
                       <i class="fas fa-trash-o"></i>
                     </div>
-                  </li>
+          </li>
 				  <?php
 						}
 					}
@@ -711,63 +714,119 @@ function check_todolistq(vals)
         </div>
         <!-- /.modal-dialog -->
       </div>
-
+   <!-- modal for todolist -->
+   <div class="modal fade" id="modal-default1">
+    <form method='post'>
+            <div class="modal-dialog" Style="margin-right:560px;">
+              <div class="modal-content" Style="width:800px;">
+          
+                <div class="modal-header">
+                  <h4 class="modal-title">To Do Programs</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <div class="card card-primary">
+                <!-- Project-add -->
+          
+                <div class="card-body">
+          
+          <div class="form-group">
+                    <label for="inputName">Titles/Topic</label>
+                    <input type="text" id="inputName" name='about' class="form-control">
+                  </div>
+                  <div class="form-group">
+              <div class='row mb-2'>
+                <div class='col mb-6'>
+                  <label>start Date:</label>
+                  <div>
+                  <input type='text' value='From Today Own-wards' disabled> </input>
+                  </div>
+                </div>
+                <div class='col mb-6' >
+                  <label>Last Date:</label>
+                  <div>
+                  <input id='ldate' name='gap' type='date'></input>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          
+                </div>
+          
+                <!-- /.card-body -->
+              </div>
+              
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+                  <button type="button" onclick='savechangestodo(<?php echo $prjctid; ?>)' id='savechanges' data-dismiss="modal" class="btn btn-primary">Save changes</button>
+                </div>
+          </div>
+          </div>
+    </form>
+          <!-- /.modal-content -->
+  </div>
+        <!-- /.modal-dialog -->
 
    <!-- modal for todolist -->
- <div class="modal fade" id="modal-default1">
- <form method='post'>
-        <div class="modal-dialog" Style="margin-right:560px;">
-          <div class="modal-content" Style="width:800px;">
-		  
-            <div class="modal-header">
-              <h4 class="modal-title">To Do Programs</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-             <div class="card card-primary">
-            <!-- Project-add -->
-			
+<div class="modal fade" id="modal-default2">
+  <form method='post'>
+    <div class="modal-dialog" Style="margin-right:560px;">
+      <div class="modal-content" Style="width:800px;">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Reviwes </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card card-primary">
+                <!-- Project-add -->
             <div class="card-body">
-			
-			<div class="form-group">
-                <label for="inputName">Titles/Topic</label>
-                <input type="text" id="inputName" name='about' class="form-control">
+              <div class="form-group">
+                  <label>Username</label>
+                    <select class="form-group select2" id='m' style="width:100%;">
+                      <option class="form-control " value="0"> --Choose from the list-- <br>
+                            <?php
+                          include('database.php');
+                            //echo "<script>alert('".$prjctid."')</script>";
+                            $sql1 ="SELECT * from tbl_group a, tbl_account r where a.prjctid=$prjctid and a.regid = r.regid ";
+                            $query1=mysqli_query($con,$sql1);
+                            $r1=mysqli_num_rows($query1);		
+                            if($r1>0)
+                            {
+                              while($result = mysqli_fetch_array($query1))
+                              {			
+                                ?>
+                        
+                            <option class="form-control " value="<?php echo $result['regid'];?>"><?php echo $result['username'];?><br> 
+                            <?php
+                              }
+                            }
+                            ?>
+                    </select>
               </div>
               <div class="form-group">
-				  <div class='row mb-2'>
-					  <div class='col mb-6'>
-						  <label>start Date:</label>
-							<div>
-							<input type='text' value='From Today Own-wards' disabled> </input>
-							</div>
-						</div>
-						<div class='col mb-6' >
-							<label>Last Date:</label>
-							<div>
-							<input id='ldate' name='gap' type='date'></input>
-							</div>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-			
-            </div>
-			
-            <!-- /.card-body -->
-          </div>
-           
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
-              <button type="button" onclick='savechangestodo(<?php echo $prjctid; ?>)' id='savechanges' data-dismiss="modal" class="btn btn-primary">Save changes</button>
-            </div>
-			</div>
-		   </div>
-		   </form>
-          <!-- /.modal-content -->
+                <label for="inputreview">Comment</label>
+                  <textarea id="inputreview" name='about' class="form-control"></textarea>
+              </div>
+               
+            </div>  
+          </div> 
+          <!-- /.card-body -->
         </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+          <button type="button" onclick='savechangesreviews(<?php echo $prjctid; ?>)' id='savechanges2' data-dismiss="modal" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </form>
+          <!-- /.modal-content -->
+</div>
         <!-- /.modal-dialog -->
 
 
@@ -823,7 +882,21 @@ function savechangestodo(vale)
 		error:function (){}
 		})
 }
-
+function savechangesreviews(vale)
+{
+	var about = $('#inputreview').val();
+		var gap = $('#m').val();	
+		$.ajax({
+		url: "reviews_add.php",
+		data:{about:about,gap:gap,vale:vale},
+		type: "POST",
+		success:function(data){
+      alert(data);
+			location.reload();
+		},
+		error:function (){}
+		})
+}
 
 
 </script>
@@ -849,6 +922,8 @@ function savechangestodo(vale)
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {

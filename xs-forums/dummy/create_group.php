@@ -45,7 +45,7 @@
  
   
 </head>
-<body class="hold-transition sidebar">
+<body class="hold-transition dark-mode sidebar">
 <!-- Site wrapper -->
 <div class="wrapper">
 <?php
@@ -109,29 +109,29 @@ include('top_side_navbar.php');
             </div>
             <div class="card-body">
               <div class="form-group">
-                  <label>Username</label>
+                <label>Username</label>
                   <select class="form-group select2" id='m' multiple="multiple" data-placeholder="Select a State" style="width:100%;">
-					 <?php
-				
-				include('database.php');
-					//echo "<script>alert('".$prjctid."')</script>";
-					$sql1 ="SELECT * from tbl_account a, tbl_reg_users r where a.regid=r.regid ";
-					$query1=mysqli_query($con,$sql1);
-					$r1=mysqli_num_rows($query1);		
-					if($r1>0)
-					{
-						while($result = mysqli_fetch_array($query1))
-						{			
-							?>
-							
-					<option class="form-control-sm " value="<?php echo $result['regid'];?>"><?php echo $result['username'];?><br>
-					(<span   id="rt" ><?php echo $result['email'];?></span>)
-					</option>
-					
-					<?php
-						}
-					}
-					?>
+                          <?php
+                        
+                        include('database.php');
+                          //echo "<script>alert('".$prjctid."')</script>";
+                          $sql1 ="SELECT * from tbl_account a, tbl_reg_users r where a.regid=r.regid ";
+                          $query1=mysqli_query($con,$sql1);
+                          $r1=mysqli_num_rows($query1);		
+                          if($r1>0)
+                          {
+                            while($result = mysqli_fetch_array($query1))
+                            {			
+                              ?>
+                      
+                          <option class="form-control-sm " value="<?php echo $result['regid'];?>"><?php echo $result['username'];?><br>
+                          (<span   id="rt" ><?php echo $result['email'];?></span>)
+                          </option>
+                          
+                          <?php
+                            }
+                          }
+                          ?>
                   </select>
                 </div>
             </div>
@@ -145,7 +145,8 @@ include('top_side_navbar.php');
           <a href="#" class="btn btn-secondary">Cancel</a>
           <input type="button" id='b' value="Create new Porject" class="btn btn-success float-right">
         </div>
-      </div>
+        
+      </div><br/>
     </section>
     <!-- /.content -->
   </div>

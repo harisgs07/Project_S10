@@ -50,7 +50,7 @@ include('database.php');
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition dark-mode sidebar-mini layout-fixed">
 <div class="wrapper">
 <?php
 include('top_side_navbar.php');
@@ -115,58 +115,14 @@ if(isset($_POST['event']))
 		<div class="card col-sm-10-12">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <!--<li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>-->
-                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Post Job Openings</a></li>
+                  <!--<li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li><li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Post Job Openings</a></li>-->
+                  
                   <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Events Publishing</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">    
-                  <div class="tab-pane" id="timeline">
-					<form  method="post" class="form-horizontal" onsubmit="#" >
-                      <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label" required>Job Name</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" name="inputName" placeholder="Job Name" required>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputDesc" class="col-sm-2 col-form-label">Description</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" name="inputDesc" placeholder="Description" required></textarea>
-                        </div>
-                      </div>
-					  <div class="form-group row">
-                        <label for="inputDesc" class="col-sm-2 col-form-label">About</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" name="inputAbout" placeholder="Methods and other Details of Exam"required></textarea>
-                        </div>
-                      </div>
-					  <div class="form-group row">
-                        <label for="inputDesc" class="col-sm-2 col-form-label">Qualification</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" name="inputqua" placeholder="Qualification" required></textarea>
-                        </div>
-                      </div>
-					  <div class="form-group row">
-                        <label for="inputDesc" class="col-sm-2 col-form-label">Start Date</label>
-                        <div class="col-sm-10">
-                          <input type="date" class="form-control" name="inputdatestrt" placeholder="Start Date" required >
-                        </div>
-                      </div>
-                     <div class="form-group row">
-                        <label for="inputDesc" class="col-sm-2 col-form-label">End Date</label>
-                        <div class="col-sm-10">
-                          <input type="date" class="form-control" name="inputdateend" placeholder="End Date" required >
-                        </div>
-                      </div>
-					   <div class="form-group row">
-                        <div class="offset-sm-2 col-sm-10">
-                          <input type='submit'  name='job' class="btn btn-danger"></input>
-                        </div>
-                      </div>
-                    </form>
-                      </div>
+                  
 					 
                       <!-- /.timeline-label -->
                       <!-- timeline item  -->
@@ -177,7 +133,7 @@ if(isset($_POST['event']))
                       </div>
                     </div>
                   </div>
-                  <!-- /.tab-pane -->
+                  /.tab-pane -->
 
                   <div class="tab-pane" id="settings">
                     <form  method="post" class="form-horizontal" onsubmit="#">
@@ -207,7 +163,7 @@ if(isset($_POST['event']))
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <input type='submit'  name="event" class="btn btn-danger"></input>
+                          <input type='submit'  name="event" class="btn btn-success"></input>
                         </div>
                       </div>
                     </form>

@@ -10,19 +10,16 @@ if(isset($_POST['signupdev']))
 	$pass = $_POST['password'];
 	$password = md5($pass);
 	$email = $_POST['email'];
+	$sql="INSERT INTO  tbl_reg_users (email, password,type) VALUES('$email','$password','user')";
+	$query = mysqli_query($con,$sql);
+	$id = mysqli_insert_id($con);
+	$sql1="INSERT INTO  tbl_account (username, regid) VALUES('$username',$id)";
+	$query1 = mysqli_query($con,$sql1);
 
-$sql="INSERT INTO  tbl_reg_users (email, password,type) VALUES('$email','$password','user')";
-$query = mysqli_query($con,$sql);
-$id = mysqli_insert_id($con);
-$sql1="INSERT INTO  tbl_account (username, regid) VALUES('$username',$id)";
-$query1 = mysqli_query($con,$sql1);
 if ($query1)
 {
-	
-		
-		$mailHtml="Please confirm your account registration by clicking the button or link below: <a href='http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id'>http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id</a>";
-		
-		
+			
+	$mailHtml="Please confirm your account registration by clicking the button or link below: <a href='http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id'>http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id</a>";
 		
 }
 else
@@ -36,16 +33,15 @@ else
 	{
 		
 	$sql="INSERT INTO  tbl_reg_users (email, password,type) VALUES('$email','$password','company')";
-$query = mysqli_query($con,$sql);
-$id = mysqli_insert_id($con);
-$sql1="INSERT INTO  tbl_cmpny_account (username, email, regid) VALUES('$username','$email','$id')";
-$query1 = mysqli_query($con,$sql1);
+	$query = mysqli_query($con,$sql);
+	$id = mysqli_insert_id($con);
+	$sql1="INSERT INTO  tbl_cmpny_account (username, email, regid) VALUES('$username','$email','$id')";
+	$query1 = mysqli_query($con,$sql1);
+
 if ($query)
 {
-		$msg="We've just sent a verification link to <strong>$email</strong>. Please check your inbox and click on the link to get started. If you can't find this email (which could be due to spam filters), just request a new one here.";
-		
-		$mailHtml="Please confirm your account registration by clicking the button or link below: <a href='http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id'>http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id</a>";
-		
+	$msg="We've just sent a verification link to <strong>$email</strong>. Please check your inbox and click on the link to get started. If you can't find this email (which could be due to spam filters), just request a new one here.";
+	$mailHtml="Please confirm your account registration by clicking the button or link below: <a href='http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id'>http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id</a>";	
 		
 }
 else

@@ -12,7 +12,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition dark-mode sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
@@ -39,11 +39,10 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content" >
 
       <!-- Default box -->
-      <div class="card card-solid">
-        <div class="card-body pb-0">
+      
           <div class="row">
 		  <?php
 		  include('database.php');
@@ -57,7 +56,7 @@
 				  {
 				  ?>
 				  <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-              <div class="card bg-light d-flex flex-fill">
+              <div class="card d-flex flex-fill">
                 <div class="card-header text-muted border-bottom-0">
                   Digital Strategist
                 </div>
@@ -89,24 +88,13 @@
 		  ?>
              
           </div>
-        </div>
+        
         <!-- /.card-body -->
         <div class="card-footer">
-          <nav aria-label="Contacts Page Navigation">
-            <ul class="pagination justify-content-center m-0">
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-              <li class="page-item"><a class="page-link" href="#">6</a></li>
-              <li class="page-item"><a class="page-link" href="#">7</a></li>
-              <li class="page-item"><a class="page-link" href="#">8</a></li>
-            </ul>
-          </nav>
+          Feel Free To Contact The Authorities !!
         </div>
         <!-- /.card-footer -->
-      </div>
+      
       <!-- /.card -->
 
     </section>

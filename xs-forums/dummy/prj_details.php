@@ -37,7 +37,7 @@ if(isset($_REQUEST['x']))
   <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
   
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition dark-mode sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
  <?php
@@ -96,15 +96,15 @@ if(isset($_REQUEST['x']))
             <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
               <div class="row">
                 <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Estimated budget</span>
+                  <div class="info-box" style="background-color:#ded9cc;">
+                    <div class="info-box-content"  style="font-color:black;">
+                      <span class="info-box-text text-center text-muted ">Estimated budget</span>
                       <span class="info-box-number text-center text-muted mb-0"><?php echo $r['amount'];?></span>
                     </div>
                   </div>
                 </div>
                 <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
+                  <div class="info-box "style="background-color:#ded9cc;">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Maximum Members</span>
                       <span class="info-box-number text-center text-muted mb-0"><?php echo $r['total_members'];?></span>
@@ -112,7 +112,7 @@ if(isset($_REQUEST['x']))
                   </div>
                 </div>
                 <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
+                  <div class="info-box" style="background-color:#ded9cc;">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Estimated project duration</span>
                       <span class="info-box-number text-center text-muted mb-0">20</span>

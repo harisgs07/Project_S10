@@ -270,13 +270,13 @@ if(isset($_REQUEST['x']))
 					  <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Company Name</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" name="inputEmail" placeholder="Company name" >
+                          <input type="text" class="form-control" id="inputName" name="inputEmail" placeholder="Company name" >
                         </div>
                       </div>
 					  <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Position</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" name="inputEmail" placeholder="Position">
+                          <input type="text" class="form-control" name="inputEmail" placeholder="Position">
                         </div>
                       </div>
 					  <div class="form-group row">
@@ -288,7 +288,7 @@ if(isset($_REQUEST['x']))
 					  <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">About</label>
                         <div class="col-sm-10">
-                          <input type="textarea" class="form-control-sm" name="inputEmail" placeholder="About">
+                          <textarea" class="form-control-sm" name="inputEmail" placeholder="About"></textarea>
                         </div>
                       </div>
                       <div class="form-group row">
@@ -353,6 +353,7 @@ if(isset($_REQUEST['x']))
 			
 			
 			</script>
+
 
 
 <!-- jQuery -->

@@ -1,41 +1,33 @@
 <!DOCTYPE html>
 <?php
-include('database.php');
-
-//........... group Enabling/Disabling .........			
-if(isset($_REQUEST['x']))
-{
-	
-	$prjctid=$_GET['x'];
-	//echo "<script>alert('$prjctid');</script>";
-	
-}
-include('database.php');
-				$sql ="SELECT * from tbl_projects where prjctid=$prjctid";
-				$query=mysqli_query($con,$sql);
-				$r=mysqli_fetch_array($query);
-				$_SESSION['hi'] = $r['description'];
-				$a=$_SESSION['hi'];
-				/*
-				$sql1 ="SELECT * from tbl_prjct_file where prjctid=$prjctid";
-				$query1=mysqli_query($con,$sql1);
-				$q=mysqli_num_rows($query1);
-				
-				$sql1 ="SELECT * from tbl_prjct_file where prjctid=$prjctid";
-				$query1=mysqli_query($con,$sql1);
-				$q=mysqli_num_rows($query1);*/
-		
+  include('database.php');
+  //........... group Enabling/Disabling .........			
+  if(isset($_REQUEST['x']))
+    {
+      $prjctid=$_GET['x'];
+      //echo "<script>alert('$prjctid');</script>";
+    }
+          $sql ="SELECT * from tbl_projects where prjctid=$prjctid";
+          $query=mysqli_query($con,$sql);
+          $r=mysqli_fetch_array($query);
+          $_SESSION['hi'] = $r['description'];
+          $a=$_SESSION['hi'];
+          /*  
+              $sql1 ="SELECT * from tbl_prjct_file where prjctid=$prjctid";
+              $query1=mysqli_query($con,$sql1);
+              $q=mysqli_num_rows($query1);
+              $sql1 ="SELECT * from tbl_prjct_file where prjctid=$prjctid";
+              $query1=mysqli_query($con,$sql1);
+              $q=mysqli_num_rows($query1);
+          */		
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>XS-Forum | Report</title>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
@@ -44,7 +36,6 @@ include('database.php');
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -68,13 +59,6 @@ include('database.php');
   <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-
-
-
-
-
-
-
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -84,13 +68,12 @@ include('database.php');
   <!-- Toastr -->
   <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition dark-mode layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
   <?php
   include('top_side_navbar.php');
   ?>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -103,7 +86,7 @@ include('database.php');
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-			  <li class="breadcrumb-item active"><a href='group_master.php?x="<?php echo $r['prjctid'];?>"'><?php echo $r['name'];?></a></li>
+			        <li class="breadcrumb-item active"><a href='group_master.php?x="<?php echo $r['prjctid'];?>"'><?php echo $r['name'];?></a></li>
               <li class="breadcrumb-item active">Report</li>
             </ol>
           </div>

@@ -1,3 +1,6 @@
+
+ 
+ 
   <?php
 include('top_side_navbar.php');
 
@@ -32,7 +35,7 @@ if(isset($_POST['send']))
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-mini ">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->

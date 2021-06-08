@@ -1,5 +1,48 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Load Composer's autoloader
+require 'auth-recovery/vendor/autoload.php';
+
+$success = "";
+$error_message = "";
 include('database.php');
+
+function sendVerification($email,$id)
+	{
+		
+	
+		$message_body = "Please confirm your account registration by clicking the button or link below: <a href='http://localhost/xs-forums/dummy/verification_email.php?id=$id'>
+    http://127.0.0.1/php/verification_email.php?id=$id</a>";
+		$mail = new PHPMailer();
+		$mail->IsSMTP();
+		$mail->SMTPDebug = 0;
+		$mail->SMTPAuth = TRUE;
+		$mail->SMTPSecure = 'tls'; // tls or ssl
+		$mail->Port     = 587;
+		$mail->Username = 'harikrishnanrc@mca.ajce.in';
+		$mail->Password = 'ambilyradha';     
+		$mail->Host     =  'smtp.gmail.com;';
+		$mail->Mailer   = "smtp";
+		$mail->SetFrom("harikrishnanrc@mca.ajce.in", "AMIN");
+		$mail->AddAddress($email);
+		$mail->Subject = "Verifying The Account";
+		$mail->MsgHTML($message_body);
+		$mail->IsHTML(true);		
+		$result = $mail->Send();
+		if(!$result)
+		{
+			echo"Mailer Error :".$mail->ErrorInfo;
+		}
+		else
+		{
+			return $result;
+		}
+		
+	}
+
 $msg="";
 if(isset($_POST['signupdev']))
 {
@@ -13,15 +56,25 @@ $query = mysqli_query($con,$sql);
 $id = mysqli_insert_id($con);
 $sql1="INSERT INTO  tbl_account (username, regid) VALUES('$username',$id)";
 $query1 = mysqli_query($con,$sql1);
-if ($query1)
-{	
-echo "<script>alert('Successfully Registered');</script>";	
-header('location:login.php');
-}
-else
-{
-	echo "<script>alert('Something went wrong. Please try again');</script>";
-}
+  if ($query1)
+  {	
+
+    $mail_status = sendVerification($email,$id);
+		echo $error_message;
+    if($mail_status == 1) 
+			{
+				$success="Check Your Email For The Link to activate your account !!!";
+					echo "<script>alert($success)</script>";
+				}
+    //$mailHtml="Please confirm your account registration by clicking the button or link below: <a href='http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id'>
+    //http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id</a>";
+    //echo "<script>alert('Successfully Registered');</script>";	
+    //header('location:login.php');
+  }
+  else
+  {
+    echo "<script>alert('Something went wrong. Please try again');</script>";
+  }
 }
 else
 {
@@ -37,15 +90,27 @@ $query = mysqli_query($con,$sql);
 $id = mysqli_insert_id($con);
 $sql1="INSERT INTO  tbl_cmpny_account (username, email, regid) VALUES('$username','$email','$id')";
 $query1 = mysqli_query($con,$sql1);
-if ($query1)
-{	
-echo "<script>alert('Successfully Registered');</script>";
-header('location:login.php');	
-}
-else
-{
-	echo "<script>alert('Something went wrong. Please try again');</script>";
-	}
+    if ($query1)
+    {
+      $mail_status = sendVerification($email,$id);
+		echo $error_message;
+    if($mail_status == 1) 
+			{
+				$success="Check Your Email For The Link to activate your account !!!";
+				echo "<script>alert($success)</script>";
+				}
+			
+      
+     // $mailHtml="Please confirm your account registration by clicking the button or link below: <a href='http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id'>
+     // http://127.0.0.1/php/email_verification/verification_email.php?id=$verification_id</a>";
+      //echo "<script>alert('Successfully Registered');</script>";	
+      //header('location:login.php');
+      
+    }
+    else
+    {
+      echo "<script>alert('Something went wrong. Please try again');</script>";
+    }
 	}
 }
 ?>

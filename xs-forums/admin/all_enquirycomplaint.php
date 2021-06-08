@@ -56,7 +56,7 @@ include('database.php');
 		  </thead>
 		  <tbody>
 	<?php
-	$sql ="SELECT q.*, a.* from tbl_enq_cmp as q, tbl_enq_comp_ans as a where a.enqid = q.enqid LIMIT 9";
+	$sql ="SELECT q.*, a.* from tbl_enq_cmp as q, tbl_enq_comp_ans as a where a.enqid = q.enqid order by a.enqansid desc";
 	$query=mysqli_query($con,$sql);
 	$r=mysqli_num_rows($query);
 	if($r>0)

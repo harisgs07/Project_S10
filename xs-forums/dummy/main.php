@@ -1,8 +1,3 @@
-<?php
-// project deadline things Need to Be updated;
-
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -200,7 +195,7 @@ include('top_side_navbar.php');
                     <textarea class="form-control form-control-sm" id="<?php echo $temp_postid;?>" placeholder="type here to post comment"></textarea>
 					</div>
 					<div class="col-md-2"  >
-					<button class="btn btn-success" onclick='post_answer(this.value);' value="<?php echo $temp_postid; ?>" placeholder="post" style="height:35px;width:100px;margin-top:8px;"><p style="padd-left:20px;"><?php echo $temp_postid; ?></p>
+					<button class="btn btn-success" onclick='post_answer(this.value);' value="<?php echo $temp_postid; ?>" placeholder="post" style="height:35px;width:100px;margin-top:8px;"><p style="padd-left:20px;">POST</p>
 					</button>
 					</div>
 				

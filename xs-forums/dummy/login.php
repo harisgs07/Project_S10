@@ -1,6 +1,10 @@
 <?php
 session_start();
 include('database.php');
+if (isset($_SESSION['id'])){
+  header('location:main.php');
+}
+
 if(isset($_POST['login']))
 {
 $email=$_POST['email'];
@@ -29,12 +33,14 @@ $r=mysqli_num_rows($query);
 				{
 					while($results1=mysqli_fetch_array($query1))
 					{
+            $_SESSION['log_in']='yes';
 						$_SESSION['uname']=$results1['username'];
 					}
 				}
 				else				
 				{
 					echo "<script>alert('Your Account Is Temporarly Unavailable or Blocked because of malicious act');</script>";
+					echo "<script type='text/javascript'> document.location = 'login.php'; </script>";
 				}
 			$_SESSION['login']=$results['regid'];
 			$_SESSION['email']=$results['email'];

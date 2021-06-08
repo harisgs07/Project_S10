@@ -14,7 +14,6 @@ $('.bl').click(function(){
             dataType: 'json',
             success: function(data){
 				$('#replay').html('');
-           $('#t').load('adminhome.php');
                 }
           
         })

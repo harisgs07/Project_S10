@@ -34,7 +34,7 @@ if(isset($_REQUEST['x']))
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition dark-mode sidebar-mini">
 <div class="wrapper">
  <?php
  include('top_side_navbar.php');
@@ -89,7 +89,7 @@ if(isset($_REQUEST['x']))
                   </li>
                 </ul>
 
-                <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                <button class="btn btn-primary btn-block" disabled><b>Follow</b></button>
               </div>
               <!-- /.card-body -->
             </div>
@@ -148,6 +148,7 @@ if(isset($_REQUEST['x']))
                   <!--<li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
                   <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>-->
                   <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#reviews" data-toggle="tab">Reviews</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -377,10 +378,57 @@ if(isset($_REQUEST['x']))
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button  onclick='update_profile(<?php echo $uid;?>);' class="btn btn-danger">Submit</button>
+                          <button  onclick='update_profile(<?php echo $uid;?>);' class="btn btn-success">Submit</button>
                         </div>
                       </div>
                     </form>
+                  </div>
+                <div class="tab-pane" id="reviews">
+                  <div class="row">
+                    <div class="col-12">
+                      <h5>Total Review</h5><br>
+                      <?php
+                          include('database.php');
+                            //echo "<script>alert('".$prjctid."')</script>";
+                            $sql1 ="SELECT * from tbl_reviews r, tbl_account a where a.regid = r.by_who_regid and r.whom_regid = $uid ";
+                            $query1=mysqli_query($con,$sql1);
+                            $r1=mysqli_num_rows($query1);		
+                            if($r1>0)
+                            {
+                              while($result = mysqli_fetch_array($query1))
+                              {			
+                                ?>
+                        
+                        <div class="post clearfix">
+                          <div class="user-block">
+                            <img class="img-circle img-bordered-sm" src="dist/img/user1-128x128.jpg" alt="user image">
+                            <span class="username">
+                              <a href='profile.php?x="<?php echo $result['regid'];?>"'><?php echo $result['username'];?></a>
+                            </span>
+                            <span class="description">Shared - <?php echo $result['entr_date'];?></span>
+                          </div>
+                          <!-- /.user-block -->
+                          <p>
+                          <?php echo $result['about_review'];?>
+                          </p>
+
+                          <p>
+                            <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
+                          </p>
+                        </div>
+                            <?php
+                              }
+                            }
+                            else{
+                              ?>
+                              <p style="color:red;">
+                              No reviews done by the users !!
+                              </p>
+                              <?php     
+                            }
+                            ?>
+                  </div>
+                </div>
                   </div>
                   <!-- /.tab-pane -->
                 </div>

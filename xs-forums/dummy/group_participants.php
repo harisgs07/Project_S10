@@ -1,35 +1,27 @@
 
 <?php
-
+include('database.php');
 //........... group Enabling/Disabling .........			
 if(isset($_REQUEST['x']))
-{
-	
-	$prjctid=$_GET['x'];
-	include('database.php');
-				$sql ="SELECT * from tbl_projects where prjctid=$prjctid";
-				$query=mysqli_query($con,$sql);
-				$r=mysqli_fetch_array($query);
-				$_SESSION['hi'] = $r['description'];
-				$a = $_SESSION['hi'];
-				
-				
-				$sql1 ="SELECT * from tbl_prjct_file where prjctid=$prjctid";
-				$query1=mysqli_query($con,$sql1);
-				$q=mysqli_num_rows($query1);
-				
-				$sql1 ="SELECT * from tbl_prjct_file where prjctid=$prjctid";
-				$query1=mysqli_query($con,$sql1);
-				$q=mysqli_num_rows($query1);
-		
-}
+  { 
+    $prjctid=$_GET['x'];
+    $sql ="SELECT * from tbl_projects where prjctid=$prjctid";
+    $query=mysqli_query($con,$sql);
+    $r=mysqli_fetch_array($query);
+    $_SESSION['hi'] = $r['description'];
+    $a = $_SESSION['hi'];
+    $sql1 ="SELECT * from tbl_prjct_file where prjctid=$prjctid";
+    $query1=mysqli_query($con,$sql1);
+    $q=mysqli_num_rows($query1);	
+    $sql1 ="SELECT * from tbl_prjct_file where prjctid=$prjctid";
+    $query1=mysqli_query($con,$sql1);
+    $q=mysqli_num_rows($query1);		
+  }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-
- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
@@ -38,13 +30,6 @@ if(isset($_REQUEST['x']))
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-
-
-
-
-
-
-
  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -65,11 +50,9 @@ if(isset($_REQUEST['x']))
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>XS_FORUM | Own Projects</title>
-
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -78,12 +61,12 @@ if(isset($_REQUEST['x']))
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-</head>
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-<div class="wrapper">
-<?php
-include('top_side_navbar.php');
-?>
+  </head>
+  <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+  <div class="wrapper">
+  <?php
+  include('top_side_navbar.php');
+  ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -96,7 +79,7 @@ include('top_side_navbar.php');
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-			  <li class="breadcrumb-item active"><a href="group.php">Group</a></li>
+			        <li class="breadcrumb-item active"><a href="group.php">Group</a></li>
               <li class="breadcrumb-item active"><?php echo $r['name'];?></li>
             </ol>
           </div><!-- /.col -->
@@ -104,37 +87,32 @@ include('top_side_navbar.php');
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-	  <div class="row info-box info-box-icon elevation-1" style="background:#343a40;" >
-	  <div class='col-12'>
-	  <h4 class="m-0" style="color:#1286a6;"><b>Description:</b></h1>
-	  </div>
-	  <div style="margin-top:4px;margin-bottom:8px; padding-left:10px;">
-		<span id="msg"><?php echo $a;?></span>
-		</div>
-		</div>
+    <div class="container-fluid">
+      <div class="row info-box info-box-icon elevation-1" style="background:#343a40;" >
+        <div class='col-12'>
+          <h4 class="m-0" style="color:#1286a6;"><b>Description:</b></h1>
+        </div>
+        <div style="margin-top:4px;margin-bottom:8px; padding-left:10px;">
+          <span id="msg"><?php echo $a;?></span>
+        </div>
+      </div>
         <!-- Info boxes -->
-        <div class="row">
-          
-		  <div class="col-12 col-sm-6 col-md-3">
+      <div class="row">         
+		    <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"> <i class="fas fa-cog"></i></span>
-
+                <span class="info-box-icon bg-info elevation-1"> <i class="fas fa-cog"></i></span>
               <div class="info-box-content">
                 <span class="info-box-text">Activity</span>
-				<div >
-		<div style="float:right;" style="margin-right:100px; margin-top:-10px; ">
-		<button style="font-size:15px;"   class="btn btn-outline-success" id='addnew' data-toggle="modal" data-target="#modal-default" >+Add Files</button>
-			</div>
-		</div>
-              </div>
-             
+				      <div>
+            <div style="float:right;" style="margin-right:100px; margin-top:-10px; ">
+                <button style="font-size:15px;"   class="btn btn-outline-success" id='addnew' data-toggle="modal" data-target="#modal-default" >+Add Files</button>
             </div>
-
-          </div>
+		      </div>
+        </div>  
+      </div>
+    </div>
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
@@ -149,14 +127,11 @@ include('top_side_navbar.php');
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
-
           <!-- fix for small devices only -->
           <div class="clearfix hidden-md-up"></div>
-
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
               <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
               <div class="info-box-content">
                 <span class="info-box-text">Files Added</span>
                 <span class="info-box-number"><?php echo $q;?></span>
@@ -169,37 +144,30 @@ include('top_side_navbar.php');
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
               <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Total Members</span>
-                <span class="info-box-number">2,000</span>
-              </div>
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Members</span>
+                  <span class="info-box-number">2,000</span>
+                </div>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
         </div>
-		
         <!-- /.row -->
-
         <!-- Main row -->
         <div class="row">
           <!-- Left col -->
           <div class="col-md-8">
-            <!-- MAP & BOX PANE -->
-           
-		   <!-- TABLE: LATEST ORDERS -->
+            <!-- MAP & BOX PANE -->    
+		        <!-- TABLE: LATEST ORDERS -->
             <div class="card" style='overflow:auto;'>  
             <!-- /.card -->
               <div class="card-header">
                 <h3 class="card-title">DataTable with default features</h3>
-				 
                 <!--<a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>-->
                 <a href='group_master.php?x=<?php echo $prjctid;?>' class="btn btn-sm btn-secondary float-right">Refresh Table</a>
-              
               </div>
-			 
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-hover">
@@ -213,21 +181,17 @@ include('top_side_navbar.php');
                   </tr>
                   </thead>
                   <tbody>
-                 
                  <?php	
-				include('database.php');
+				  include('database.php');
 					//echo "<script>alert('".$prjctid."')</script>";
 					$sql1 ="SELECT *,f.about from tbl_prjct_file f, tbl_account a where f.prjctid=$prjctid and f.regid=a.regid ";
 					$query1=mysqli_query($con,$sql1);
 					$r1=mysqli_num_rows($query1);
-				
-					
 					if($r1>0)
 					{
 						while($result = mysqli_fetch_array($query1))
 						{
-							//$_SESSION['d']= $result['acid'];
-							
+							//$_SESSION['d']= $result['acid'];	
 							?>
 						<tr>
 						<td><?php echo $result['prjfileid'];?></td>
@@ -240,93 +204,69 @@ include('top_side_navbar.php');
 						}	
 					}?>  
 				  </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Id</th>
-                    <th>File_Name</th>
-                    <th>About</th>
-                    <th>Date</th>
-					<th>By_Whom</th>           
-                  </tr>
-                  </tfoot>				  
-                </table>
-              </div>
-			  </div>
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
+            <tfoot>
+              <tr>
+                <th>Id</th>
+                <th>File_Name</th>
+                <th>About</th>
+                <th>Date</th>
+					      <th>By_Whom</th>           
+              </tr>
+            </tfoot>				  
+          </table>
+      </div>
+		</div>
             <!-- /.card -->
-            <div class="row">
-              <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
                 <!-- DIRECT CHAT -->
-                <div class="card direct-chat direct-chat-warning">
-                  <div class="card-header">
-                    <h3 class="card-title">Direct Chat</h3>
-                    <div class="card-tools">
-                      <span title="3 New Messages" class="badge badge-warning">3</span>
-                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+          <div class="card direct-chat direct-chat-warning">
+            <div class="card-header">
+              <h3 class="card-title">Direct Chat</h3>
+                <div class="card-tools">
+                  <span title="3 New Messages" class="badge badge-warning">3</span>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
-                      </button>
-                      <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
+                    </button>
+                    <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
                         <i class="fas fa-comments"></i>
-                      </button>
-                      <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
                         <i class="fas fa-times"></i>
-                      </button>
-                    </div>
+                    </button>
                   </div>
+                </div>
                   <!-- /.card-header -->
-                  <div id='gchat1' class="card-body">
-                    <!-- Conversations are loaded here -->
-                    <div id='gchat'class="direct-chat-messages" >
-					
+                <div id='gchat1' class="card-body">
+                  <!-- Conversations are loaded here -->
+                <div id='gchat'class="direct-chat-messages" >
 					<?php
-				
 					$l = $prjctid;
 					include('./group_chat_content.php');
 					?>
-					
                       <!-- /.direct-chat-msg -->
-                    </div>
+        </div>
                     <!--/.direct-chat-messages-->
-
                     <!-- Contacts are loaded here -->
-                   
                     <!-- /.direct-chat-pane -->
-                  </div>
+        </div>
                   <!-- /.card-body -->
-                  <div class="card-footer">
-                    <form action="#" method="post">
-                      <div class="input-group">
-                        <input type="text" name="message" id='messages' placeholder="Type Message ..." class="form-control">
-                        <span class="input-group-append">
-                          <button type="button" onclick='update_chat(<?php echo $prjctid;?>,<?php echo $s;?>);' class="btn btn-warning">Send</button>
-                        </span>
-                      </div>
-                    </form>
-                  </div>
-                  <!-- /.card-footer-->
-                </div>
-                <!--/.direct-chat -->
+        <div class="card-footer">
+          <form action="#" method="post">
+            <div class="input-group">
+              <input type="text" name="message" id='messages' placeholder="Type Message ..." class="form-control">
+                <span class="input-group-append">
+                  <button type="button" onclick='update_chat(<?php echo $prjctid;?>,<?php echo $s;?>);' class="btn btn-warning">Send</button>
+                </span>
               </div>
-              <!-- /.col -->
-              
-			<script>
-			
+          </form>
+        </div>
+                  <!-- /.card-footer-->
+      </div>
+                <!--/.direct-chat -->
+    </div>
+              <!-- /.col -->            
+			<script>	
 		function update_chat(prid,id)
 		{
 			/*alert(val);
@@ -349,57 +289,44 @@ include('top_side_navbar.php');
 				$('#gchat').load('group_chat_content.php',{'path':prid});
 				}
 			})
-		}
-			
-			
+		}	
 			</script>
-			 
-			 
-			 
-			 
 			 <div class="col-md-6">
                 <!-- USERS LIST -->
                 <div class="card">
                   <div class="card-header">
                     <h3 class="card-title">All Members</h3>
-					
-					
-					
 					 <?php
 					include('database.php');
 					//echo "<script>alert('".$prjctid."')</script>";
 					$sql1 ="SELECT * from tbl_group g , tbl_account a where g.prjctid=$prjctid and g.regid=a.regid";
 					$query1=mysqli_query($con,$sql1);
-					$r11=mysqli_num_rows($query1);
-					
+					$r11=mysqli_num_rows($query1);				
 					?>
-
-					
-                    <div class="card-tools">
-                      <span class="badge badge-danger"><?php echo $r11; ?> Members</span>
-                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                      </button>
-                      <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </div>
-                  </div>
+        <div class="card-tools">
+          <span class="badge badge-danger"><?php echo $r11; ?> Members</span>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+      </div>
                   <!-- /.card-header -->
-                  <div class="card-body p-0">
-				  
-                    <ul class="users-list clearfix">
+      <div class="card-body p-0">
+				<ul class="users-list clearfix">
 					<?php
 				  if ($r11 > 0)
 				  {
 					  while($r1 = mysqli_fetch_array($query1))
 						{
 				  ?>
-                      <li>
-                        <img src="dist/img/user1-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href='profile.php?x="<?php echo $r1['regid'];?>"'><?php echo $r1['username']; ?></a>
-                      </li>
-                     <?php
+                <li>
+                  <img src="dist/img/user1-128x128.jpg" alt="User Image">
+                      <a class="users-list-name" href='profile.php?x="<?php echo $r1['regid'];?>"'><?php echo $r1['username']; ?></a>
+                </li>
+          <?php
 						}
 				  }
 					 ?>
@@ -439,8 +366,6 @@ include('top_side_navbar.php');
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <ul class="products-list product-list-in-card pl-2 pr-2">
-				
-				
 				<?php
 					include('database.php');
 					//echo "<script>alert('".$prjctid."')</script>";
@@ -463,13 +388,10 @@ include('top_side_navbar.php');
                         <?php echo $result['about'];?>
                       </span>
                     </div>
-                  </li>
-						
+                  </li>			
 						<?php
 						}	
 					}?>
-				
-                
                   <!-- /.item -->
                 </ul>
               </div>
@@ -490,7 +412,6 @@ include('top_side_navbar.php');
               </div>
 			  <form method='post'>
               <!-- /.card-header -->
-  
 				  <?php  
 				$sqlp ="SELECT * from todolist where prjctid=$prjctid";
 				$querysql=mysqli_query($con,$sqlp);
@@ -527,19 +448,19 @@ include('top_side_navbar.php');
 						{ 
 				  ?>
 				  <li>                  
-                    <!-- checkbox -->
-                    <div  class=" d-inline ml-2">
-                     <input type="checkbox" value="" onclick='check_todolistq(<?php echo $qres['id'];?>)'></input>
-                    </div>
-                    <!-- todo text -->
-                    <span class="text" id="<?php echo $qres['id'];?>" ><?php echo $qres['about']; ?></span>
-                    <!-- Emphasis label -->
-                    <small class="badge badge-danger"><i class="far fa-clock"></i> <?php echo ceil((strtotime(date("Y-m-d")) - strtotime($qres['last_date']))/86400);?> days</small>
-                    <!-- General tools such as edit or delete-->
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
+              <!-- checkbox -->
+              <div  class=" d-inline ml-2">
+                <input type="checkbox" value="" onclick='check_todolistq(<?php echo $qres['id'];?>)'></input>
+              </div>
+              <!-- todo text -->
+              <span class="text" id="<?php echo $qres['id'];?>" ><?php echo $qres['about']; ?></span>
+              <!-- Emphasis label -->
+              <small class="badge badge-danger"><i class="far fa-clock"></i> <?php echo ceil((strtotime(date("Y-m-d")) - strtotime($qres['last_date']))/86400);?> days</small>
+              <!-- General tools such as edit or delete-->
+              <div class="tools">
+                <i class="fas fa-edit"></i>
+                <i class="fas fa-trash-o"></i>
+              </div>
                   </li>
 				  <?php
 						}
@@ -573,14 +494,13 @@ include('top_side_navbar.php');
 					</ul>
 				</div>
 				  
-                <?php
+            <?php
 				}
 				?>
-				
-              <!-- /.card-body -->
+              <!-- /.card-body 
               <div class="card-footer clearfix" >
                 <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modal-default1"><i class="fas fa-plus" ></i> Add item</button>
-              </div>
+              </div>-->
 			  </form>
             </div>
           </div>
@@ -614,7 +534,6 @@ include('top_side_navbar.php');
 			 <?php
 			 include('fileupload.php'); 
 			?> 
-			 
             </div>
             <!-- /.card-body -->
           </div>
@@ -640,7 +559,6 @@ include('top_side_navbar.php');
   </footer>
 </div>
 <!-- ./wrapper -->
-
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
@@ -660,12 +578,10 @@ include('top_side_navbar.php');
 <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
 <!-- ChartJS -->
 <script src="plugins/chart.js/Chart.min.js"></script>
-
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard2.js"></script>
-
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -696,8 +612,7 @@ include('top_side_navbar.php');
    
   });
 </script>
-
-  <script>
+<script>
 function check_todolistq(vals)
 {
 	//alert(vals);
@@ -713,7 +628,5 @@ function check_todolistq(vals)
 		})
 }
 </script>
-
-
 </body>
 </html>

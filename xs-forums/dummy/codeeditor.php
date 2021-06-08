@@ -1,7 +1,3 @@
-<?php
-// project deadline things Need to Be updated;
-
-?>
 
 
 <!DOCTYPE html>

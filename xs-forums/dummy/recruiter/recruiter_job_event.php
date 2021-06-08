@@ -109,7 +109,6 @@ if(isset($_POST['event']))
 
     <!-- Main content -->
     <section class="content">
-	
 
 		
 		<div class="card col-sm-10-12">
@@ -123,6 +122,7 @@ if(isset($_POST['event']))
               <div class="card-body">
                 <div class="tab-content">    
                   <div class="tab-pane" id="timeline">
+				
 					<form  method="post" class="form-horizontal" onsubmit="#" >
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label" required>Job Name</label>
@@ -166,6 +166,7 @@ if(isset($_POST['event']))
                         </div>
                       </div>
                     </form>
+					
                       </div>
 					 
                       <!-- /.timeline-label -->
@@ -180,6 +181,7 @@ if(isset($_POST['event']))
                   <!-- /.tab-pane -->
 
                   <div class="tab-pane" id="settings">
+				
                     <form  method="post" class="form-horizontal" onsubmit="#">
                     <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Event Name</label>
@@ -211,6 +213,7 @@ if(isset($_POST['event']))
                         </div>
                       </div>
                     </form>
+				
                   </div>
                   <!-- /.tab-pane -->
                 </div>
