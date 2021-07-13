@@ -218,8 +218,7 @@ include('top_side_navbar.php');
 			toastr.danger('updation Went Error');
 		}
 		})
-  }
-      
+  }     
     )
 	
 	})

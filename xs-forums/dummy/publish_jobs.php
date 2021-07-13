@@ -1,35 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
 include('database.php');
 
@@ -50,7 +18,7 @@ if(isset($_REQUEST['x']))
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>XS_FORUM | Projects</title>
+  <title>XS_FORUM | Published Jobs</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -81,12 +49,12 @@ if(isset($_REQUEST['x']))
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Search Projects</h1>
+            <h1>Published Jobs</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="main.php">Home</a></li>
-              <li class="breadcrumb-item active">Search Projects</li>
+              <li class="breadcrumb-item active">Published Jobs</li>
             </ol>
           </div>
         </div>
@@ -98,7 +66,7 @@ if(isset($_REQUEST['x']))
         <div class="row">
                 <div class="col-12">
                   <h4>
-                    <i class="fas fa-globe"></i> Xs-Forum | Projects.
+                    <i class="fas fa-globe"></i> Xs-Forum | Published Jobs.
                     <small class="float-right">Date: <?php echo date('d-m-y');?></small>
                   </h4>
                 </div>
@@ -107,14 +75,14 @@ if(isset($_REQUEST['x']))
 			  <?php	
 				include('database.php');
 					//echo "<script>alert('".$prjctid."')</script>";
-					$sql1 ="SELECT * from tbl_folder f , tbl_account a where a.regid = f.regid and f.regid != '$s' ";
+					$sql1 ="SELECT * from tbl_projects_job p, tbl_reg_users r where p.regid = r.regid and r.type = 'company' ";
 					$query1=mysqli_query($con,$sql1);
 					$r1=mysqli_num_rows($query1);
 				?>
               <!-- info row -->
               <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
-                  <b>Total Projects:</b> <?php echo $r1; ?>
+                  <b>Total Jobs:</b> <?php echo $r1; ?>
                 </div>
                 <!-- /.col -->
                
@@ -136,9 +104,13 @@ if(isset($_REQUEST['x']))
                   <thead>
                   <tr>
                     <th>Id</th>
-                    <th>Folder Name</th>
+                    <th>job Name</th>
+                    <th>Description</th>
+                    <th>Qualification</th>
+
                     <!--<th>About</th>-->
-                    <th>Date</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
 					<th>By_Whom</th>   
                   </tr>
                   </thead>
@@ -154,11 +126,13 @@ if(isset($_REQUEST['x']))
 							
 							?>
 						<tr>
-						<td><?php echo $result['folderid'];?></td>
-						 <td>
-                         <a href='download_details.php?x="<?php echo $result['folderid'];?>"'><?php echo $result['foldername'];?></td>
-						 <td><?php echo $result['date'];?></td>
-						 <td><a href='profile.php?x="<?php echo $result['regid'];?>"'><?php echo $result['username'];?></td>
+						<td><?php echo $result['jobid'];?></td>
+             <td><?php echo $result['job_name'];?></td>
+             <td><?php echo $result['job_desc'];?></td>
+             <td><?php echo $result['qualification'];?></td>
+						 <td><?php echo $result['reg_date_start'];?></td>
+             <td><?php echo $result['reg_date_ends'];?></td>
+						 <td><?php echo $result['email'];?></td>
 						</tr>
 						<?php
 						}	
@@ -166,10 +140,15 @@ if(isset($_REQUEST['x']))
 				  </tbody>
                   <tfoot>
                   <tr>
-                    <th>Id</th>
-                    <th>File_Name</th>
-                    <th>Date</th>
-					<th>By_Whom</th>           
+                  <th>Id</th>
+                    <th>job Name</th>
+                    <th>Description</th>
+                    <th>Qualification</th>
+
+                    <!--<th>About</th>-->
+                    <th>Start Date</th>
+                    <th>End Date</th>
+					<th>By_Whom</th>         
                   </tr>
                   </tfoot>				  
                 </table>

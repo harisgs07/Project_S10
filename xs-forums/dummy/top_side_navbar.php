@@ -214,6 +214,12 @@ $s = $_SESSION['id'];
                   <p>Job and Event Updates</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="publish_jobs.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Published jobs</p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="upload_project.php" class="nav-link">

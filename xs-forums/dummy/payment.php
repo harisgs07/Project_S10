@@ -2,7 +2,7 @@
      include('database.php');
      session_start();
      $s = $_SESSION['id'];	
-     //$folderid=$_GET['x'];
+     $folderid=$_GET['x'];
      $sql ="SELECT * from tbl_reg_users r, tbl_account a where r.regid='$s' and a.regid=r.regid";
      $query=mysqli_query($con,$sql);
      $r=mysqli_fetch_array($query);
@@ -32,7 +32,7 @@ $(document).ready(function(e){
     var product_id =  '<?php echo $folderid;?>';
     var regid = '<?php echo $s;?>'
     var options = {
-    "key": "rzp_live_ILgsfZCZoFIKMb",
+    "key": "rzp_live_OhB18F9IlOjcBC",
     "amount": <?php echo $r11 * 100 ;?>, // 2000 paise = INR 20
     "name": "XS_FORUM",
     "description": "Payment",

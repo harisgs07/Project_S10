@@ -1,8 +1,8 @@
 <?php
-
+session_start();
+?>
+<?php
 // project deadline things Need to Be updated;
-
-
  include('database.php');
 //........... group Enabling/Disabling .........			
 if(isset($_REQUEST['x']))
@@ -178,10 +178,7 @@ if (isset($_POST['join']))
                 $sqlpayment ="SELECT * from tbl_payment where regid='$s' and folderid=$folderid";
                 $querypayment=mysqli_query($con,$sqlpayment);
                 $r7=mysqli_num_rows($querypayment);
-                $spayment ="SELECT * from tbl_folder where regid='$s' and folderid=$folderid";
-                $qpayment=mysqli_query($con,$spayment);
-                $r77=mysqli_num_rows($qpayment);
-                if($r7>0 or $r77>0)
+                if($r7>0)
                 {
                         ?>
                        <form method='post' action='checkcheck_zip.php?x=<?php echo $r['foldername'];?>'>
@@ -200,6 +197,7 @@ if (isset($_POST['join']))
                 }
                 else
                     {
+                       
                         ?>
 
 <div class="text-muted">
@@ -207,9 +205,23 @@ if (isset($_POST['join']))
                 <span class="badge badge-danger float-left" style="font-size:12px;">In Order to Download files your are requested to pay the amount</span>
                       <br/>  <span class="badge badge-danger"id=p value='<?php echo $r['price']; ?>' style="font-size:13px;">Amount: <?php echo $r['price']; ?></span>
                 </p>
-              </div>     
-                        
-                        <form method='post' action='payment.php?x=<?php echo$r['folderid'];?>'>
+              </div>   
+              <?php
+               if($r['price'] == 0)
+                        {
+                            ?>
+                             <form method='post' action='checkcheck_zip.php?x=<?php echo $r['foldername'];?>'>
+                        <button type="submit" name="download" class="btn btn-md btn-success toastrDefaultSuccessdownload" >
+                            Download
+                        </button>
+                        </form>
+                            
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <form method='post' action='payment.php?x=<?php echo $r['folderid'];?>'>
                         <button type="button" name="download" class="btn btn-md btn-success toastrDefaultSuccessdownload" disabled>
                             Download
                         </button>
@@ -220,7 +232,8 @@ if (isset($_POST['join']))
                   Chat
                 </button> 
                         </form>
-                <?php
+                            <?php
+                        }
                 }
                 ?>
 				 
@@ -241,7 +254,7 @@ if (isset($_POST['join']))
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 3.1.0
     </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2014-2021 <a>Xs-forums.io</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
